@@ -3,10 +3,17 @@
  * Функція `generateRandomPassword` генерує випадковий пароль заданої довжини.
  *
  * length - довжина пароля.
- *
+ *3b9v
  * Повертає випадковий пароль.
  */
 function generateRandomPassword(length) {
+  let pass = "";
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+  for (let i = 0; i < length; i++) {
+    pass += characters.charAt(Math.floor(Math.random() * characters.length));
+  };
+  return pass
+
   // Створюємо порожній рядок для збереження паролю.
   // Створюємо рядок characters "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789" з доступних символів для паролю.
   // За допомогою циклу for проходимось по кожному символу рядка characters
@@ -27,6 +34,11 @@ console.log(generateRandomPassword(8));
  * Поверне: Площу кола.
  */
 function calculateCircleArea(radius) {
+  if (isNaN(radius)) {
+    return null
+  } else {
+    return Math.PI * Math.pow(radius, 2)
+  }
   // Перевірка, чи переданий радіус є числом.
   // Якщо радіус не є числом, виводимо в консоль повідомлення про помилку.
   // Повертаємо null, щоб показати, що обчислення не можливе.
@@ -46,6 +58,17 @@ console.log(calculateCircleArea(5));
  * Поверне: Об'єкт, що містить мінімальне та максимальне число.
  */
 function findMinMax(numbers) {
+  if (!Array.isArray(numbers)) {
+    return null
+  } else {
+    const min = Math.min(...numbers);
+    const max = Math.max(...numbers)
+    return {
+      min: min,
+      max: max
+    }
+  }
+
   // Перевіряємо, чи переданий параметр є масивом.
   // Якщо переданий параметр не є масивом, виводимо в консоль повідомлення про помилку.
   // Повертаємо null, що свідчить про неможливість обробки вхідних даних.
@@ -67,6 +90,11 @@ console.log(findMinMax([5, 2, 9, 1, 5, 6, 7, 8]));
  * Поверне: Довжину гіпотенузи.
  */
 function calculateHypotenuse(a, b) {
+  if (!isNaN(a) && !isNaN(b)) {
+    return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2))
+  } else {
+    return null
+  }
   // Перевіряємо, чи довжини катетів є числами. Оператор typeof повертає рядок, що вказує тип непустого операнда.
   // Якщо довжини катетів не є числами, виводимо в консоль повідомлення про помилку.
   // Повертаємо null, що свідчить про неможливість обробки вхідних даних.
@@ -86,6 +114,21 @@ console.log(calculateHypotenuse(3, 4));
  *  Поверне: Об'єкт з заокругленими значеннями числових властивостей.
  */
 function roundObjectValues(obj) {
+  if (obj !== null && typeof obj === 'object') {
+    Object.entries(obj).map(([key, value]) => {
+      if (typeof value === "number") {
+        obj[key] = Math.ceil(value)
+
+      } else {
+        obj[key] = value
+
+      }
+    });
+    return obj
+  } else {
+    return null
+  }
+
   // Перевіряємо, чи аргумент є об'єктом.
   // Також перевіряємо, що аргумент не є null.
   // Якщо аргумент не є об'єктом або є null, виводимо повідомлення "Помилка: аргумент має бути об'єктом".
